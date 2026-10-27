@@ -78,10 +78,7 @@ export default function App() {
   const [geoName, setGeoName] = useState<string | null>(null)
   const [preference, setPreference] = useState(readPreference)
 
-  const coords = useMemo(
-    () => (manualPlace ? manualPlace : geo.status === 'ok' ? { lat: geo.lat, lon: geo.lon } : null),
-    [manualPlace, geo],
-  )
+  const coords = manualPlace ?? (geo.status === 'ok' ? { lat: geo.lat, lon: geo.lon } : null)
   const { state: weatherState, retry } = useWeather(coords)
 
   useEffect(() => {
